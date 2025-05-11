@@ -1,5 +1,5 @@
 import { TaskStatus } from "@/enums/task-status.enum";
-import { Task } from "@/types/task";
+import { Task, TaskStatusSummary } from "@/types/task";
 
 const apiUrl = process.env.NEXT_PUBLIC_KANDO_API_URL;
 
@@ -43,4 +43,10 @@ export async function deleteTask(id: string) {
   });
   if (!response.ok) throw new Error("Failed to delete task");
   return true;
+}
+
+export async function fetchTaskSummary(): Promise<TaskStatusSummary> {
+  const response = await fetch(`${apiUrl}/task/summary/status`);
+  if (!response.ok) throw new Error("Failed to fetch summary");
+  return response.json();
 }
