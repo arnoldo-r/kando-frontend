@@ -5,6 +5,7 @@ import { TaskStatus } from "@/enums/task-status.enum";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useState } from "react";
 import { TaskCard } from "./TaskCard";
+import { Task } from "@/types/task";
 
 const STATUS_LABELS: Record<TaskStatus, string> = {
   todo: "Por hacer",
@@ -12,7 +13,13 @@ const STATUS_LABELS: Record<TaskStatus, string> = {
   completed: "Completadas",
 };
 
-export function TaskList() {
+interface TaskListProps {
+  onEdit: (task: Task) => void;
+  onDelete: (task: Task) => void;
+  onChangeStatus: (task: Task, status: TaskStatus) => void;
+}
+
+export function TaskList({ onEdit, onDelete, onChangeStatus }: TaskListProps) {
   const { data: tasks = [], isLoading, error } = useTasks();
   const [selectedStatus, setSelectedStatus] = useState<TaskStatus>(
     TaskStatus.TODO
@@ -31,7 +38,13 @@ export function TaskList() {
     );
 
     content = filteredTasks.map((task) => (
-      <TaskCard key={task.id} task={task} />
+      <TaskCard
+        key={task.id}
+        task={task}
+        onEdit={() => onEdit(task)}
+        onDelete={() => onDelete(task)}
+        onChangeStatus={(status) => onChangeStatus(task, status)}
+      />
     ));
   }
 
@@ -39,7 +52,7 @@ export function TaskList() {
     <Tabs
       value={selectedStatus}
       className="w-full max-w-xl mx-auto"
-      onValueChange={(val: TaskStatus) => setSelectedStatus(val as TaskStatus)}
+      onValueChange={(val: string) => setSelectedStatus(val as TaskStatus)}
     >
       <TabsList className="grid grid-cols-3 w-full h-full rounded-lg mb-2">
         {Object.entries(STATUS_LABELS).map(([status, label]) => (
