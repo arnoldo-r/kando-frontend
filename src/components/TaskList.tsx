@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useState } from "react";
 import { TaskCard } from "./TaskCard";
 import { Task } from "@/types/task";
+import { LoaderCircle } from "lucide-react";
 
 const STATUS_LABELS: Record<TaskStatus, string> = {
   todo: "Por hacer",
@@ -27,7 +28,11 @@ export function TaskList({ onEdit, onDelete, onChangeStatus }: TaskListProps) {
 
   let content;
   if (isLoading) {
-    content = <div className="text-center py-8">Cargando...</div>;
+    content = (
+      <div className="flex justify-center py-8 h-xl my-auto">
+        <LoaderCircle className="animate-spin" />
+      </div>
+    );
   } else if (error) {
     content = (
       <div className="text-center py-8">Error en la obtención de tareas</div>
