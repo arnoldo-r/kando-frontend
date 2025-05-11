@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { TaskStatus } from "@/enums/task-status.enum";
+import { Plus } from "lucide-react";
 
 export default function TaskPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -83,11 +84,13 @@ export default function TaskPage() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Tareas</h1>
-        <Button onClick={handleAdd}>Añadir</Button>
-      </div>
+    <div className="mt-6 mx-2">
+      <Button
+        onClick={handleAdd}
+        className="fixed bottom-6 right-6 rounded-xl shadow-xl w-14 h-14 flex items-center justify-center"
+      >
+        <Plus />
+      </Button>
       <TaskList
         onEdit={handleEdit}
         onDelete={handleDelete}

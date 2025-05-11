@@ -56,7 +56,7 @@ export function TaskList({ onEdit, onDelete, onChangeStatus }: TaskListProps) {
   return (
     <Tabs
       value={selectedStatus}
-      className="w-full max-w-xl mx-auto"
+      className="w-full max-w-220 mx-auto"
       onValueChange={(val: string) => setSelectedStatus(val as TaskStatus)}
     >
       <TabsList className="grid grid-cols-3 w-full h-full rounded-lg mb-2">
@@ -72,7 +72,7 @@ export function TaskList({ onEdit, onDelete, onChangeStatus }: TaskListProps) {
       </TabsList>
       {Object.entries(STATUS_LABELS).map(([status]) => (
         <TabsContent key={status} value={status} className="space-y-2">
-          <div className="flex flex-col gap-4">{content}</div>
+          <div className="flex flex-col gap-4 mx-2">{content}</div>
         </TabsContent>
       ))}
     </Tabs>
