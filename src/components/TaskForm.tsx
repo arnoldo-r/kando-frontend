@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Task } from "@/types/task";
 import { TaskStatus } from "@/enums/task-status.enum";
+import { LoaderCircle } from "lucide-react";
 
 interface TaskFormProps {
   initialData?: Partial<Task>;
@@ -67,7 +68,8 @@ export function TaskForm({
         onChange={(e) => setTitle(e.target.value)}
         disabled={loading}
         required
-        minLength={3}
+        maxLength={50}
+        minLength={4}
       />
       <Textarea
         placeholder="Description"
@@ -75,7 +77,8 @@ export function TaskForm({
         onChange={(e) => setDescription(e.target.value)}
         disabled={loading}
         required
-        minLength={5}
+        minLength={4}
+        maxLength={200}
       />
       <Select
         value={status}
@@ -94,7 +97,7 @@ export function TaskForm({
         </SelectContent>
       </Select>
       <Button type="submit" disabled={loading}>
-        {loading ? "Saving..." : "Save"}
+        {loading ? <LoaderCircle className="animate-spin" /> : "Guardar"}
       </Button>
     </form>
   );

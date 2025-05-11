@@ -61,9 +61,7 @@ export default function Home() {
   };
 
   const handleDelete = (task: Task) => {
-    if (window.confirm("¿Seguro que quieres eliminar esta tarea?")) {
-      deleteMutation.mutate(task);
-    }
+    deleteMutation.mutate(task);
   };
 
   const handleChangeStatus = (task: Task, status: TaskStatus) => {

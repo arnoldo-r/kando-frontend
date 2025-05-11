@@ -11,6 +11,16 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { TaskStatus } from "@/enums/task-status.enum";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface TaskCardProps {
   task: Task;
@@ -34,9 +44,27 @@ export function TaskCard({
             <Button variant="outline" size="icon" onClick={onEdit}>
               <Pencil />
             </Button>
-            <Button variant="outline" size="icon" onClick={onDelete}>
-              <Trash />
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Trash />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    ¿Seguro que quieres eliminar esta tarea?
+                  </AlertDialogTitle>
+                </AlertDialogHeader>
+                <p>Esta acción no se puede deshacer.</p>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                  <AlertDialogAction onClick={onDelete}>
+                    Eliminar
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </span>
         </div>
       </CardHeader>
