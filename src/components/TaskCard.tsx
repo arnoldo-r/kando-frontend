@@ -39,7 +39,9 @@ export function TaskCard({
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <span className="font-semibold">{task.title}</span>
+          <span className="font-semibold break-words flex-1 min-w-0">
+            {task.title}
+          </span>
           <span className="flex gap-2">
             <Button variant="outline" size="icon" onClick={onEdit}>
               <Pencil />

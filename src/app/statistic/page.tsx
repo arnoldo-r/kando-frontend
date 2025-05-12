@@ -13,9 +13,9 @@ export default function StatisticPage() {
   else content = <Chart data={statuses} />;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh]">
+    <div className="flex flex-col items-center py-8 min-h-[70vh]">
       <h1 className="text-2xl font-bold mb-6">Estadística</h1>
-      <div className="w-full">{content}</div>
+      <div className="w-full text-center">{content}</div>
     </div>
   );
 }

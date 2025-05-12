@@ -64,14 +64,18 @@ export function TaskList({ onEdit, onDelete, onChangeStatus }: TaskListProps) {
           <TabsTrigger
             key={status}
             value={status}
-            className="py-3 font-bold uppercase"
+            className="py-2 text-sm font-semibold uppercase"
           >
             {label}
           </TabsTrigger>
         ))}
       </TabsList>
       {Object.entries(STATUS_LABELS).map(([status]) => (
-        <TabsContent key={status} value={status} className="space-y-2">
+        <TabsContent
+          key={status}
+          value={status}
+          className="space-y-2 overflow-y-auto max-h-[70vh]"
+        >
           <div className="flex flex-col gap-4 mx-2">{content}</div>
         </TabsContent>
       ))}
