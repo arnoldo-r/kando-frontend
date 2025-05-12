@@ -1,5 +1,5 @@
 import { TaskStatus } from "@/enums/task-status.enum";
-import { Task, TaskStatusSummary } from "@/types/task";
+import { Task } from "@/types/task";
 
 const apiUrl = process.env.NEXT_PUBLIC_KANDO_API_URL;
 
@@ -8,7 +8,7 @@ export async function createTask(data: {
   description: string;
   status: TaskStatus;
 }) {
-  const response = await fetch(`${apiUrl}/task`, {
+  const response = await fetch(`${apiUrl}/tasks`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -18,7 +18,7 @@ export async function createTask(data: {
 }
 
 export async function fetchTasks(): Promise<Task[]> {
-  const response = await fetch(`${apiUrl}/task`);
+  const response = await fetch(`${apiUrl}/tasks`);
   if (!response.ok) throw new Error("Failed to fetch tasks");
   return response.json();
 }
@@ -27,7 +27,7 @@ export async function updateTask(
   id: string,
   data: Partial<Pick<Task, "title" | "description" | "status">>
 ) {
-  const response = await fetch(`${apiUrl}/task/${id}`, {
+  const response = await fetch(`${apiUrl}/tasks/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -37,16 +37,10 @@ export async function updateTask(
 }
 
 export async function deleteTask(id: string) {
-  const response = await fetch(`${apiUrl}/task/${id}`, {
+  const response = await fetch(`${apiUrl}/tasks/${id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
   if (!response.ok) throw new Error("Failed to delete task");
   return true;
-}
-
-export async function fetchTaskSummary(): Promise<TaskStatusSummary> {
-  const response = await fetch(`${apiUrl}/task/summary/status`);
-  if (!response.ok) throw new Error("Failed to fetch summary");
-  return response.json();
 }

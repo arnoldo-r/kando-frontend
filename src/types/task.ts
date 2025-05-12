@@ -20,5 +20,3 @@ export interface UpdateTaskDto {
   description?: string;
   status?: TaskStatus;
 }
-
-export type TaskStatusSummary = Record<TaskStatus, number>;
